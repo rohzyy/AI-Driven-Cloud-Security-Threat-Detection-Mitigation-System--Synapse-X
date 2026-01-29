@@ -69,29 +69,6 @@ def health_check():
 
 @app.route("/api/request", methods=["POST"])
 def handle_request():
-    """
-    Main endpoint for threat detection
-    
-    Expected payload:
-    {
-        "src_ip": "192.168.1.5",
-        "rate": 10,
-        "sbytes": 500,
-        "spkts": 5,
-        ... (UNSW-NB15 features)
-    }
-    """
-    # NOTE: Removed models_loaded check - rule-based detection works without ML models
-    # if not models_loaded:
-    #     return jsonify({"error": "Models not loaded"}), 500
-    
-    payload = request.json
-    
-    if not payload:
-        return jsonify({"error": "No payload provided"}), 400
-    
-    # Extract IP for logging
-    src_ip = payload.get("src_ip", request.remote_addr)
     payload["src_ip"] = src_ip
     
     # Check if IP is already blocked
@@ -173,16 +150,6 @@ def handle_request():
         import traceback
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
-
-
-@app.route("/api/logs/<log_type>", methods=["GET"])
-def get_logs(log_type):
-    """
-    Get recent logs
-    
-    Args:
-        log_type: activity, threat, or mitigation
-    """
     try:
         lines = int(request.args.get("lines", 20))
         logs = get_recent_logs(log_type, lines)
@@ -215,26 +182,6 @@ def serve_frontend(filename):
 def alerts_page():
     """Alerts page"""
     return send_from_directory(".", "alerts.html")
-
-@app.route("/mitigations.html")
-def mitigations_page():
-    """Mitigations page"""
-    return send_from_directory(".", "mitigations.html")
-
-@app.route("/assets.html")
-def assets_page():
-    """Assets page"""
-    return send_from_directory(".", "assets.html")
-
-@app.route("/reports.html")
-def reports_page():
-    """Reports page"""
-    return send_from_directory(".", "reports.html")
-
-@app.route("/models.html")
-def models_page():
-    """ML Models page"""
-    return send_from_directory(".", "models.html")
 
 @app.route("/users.html")
 def users_page():
@@ -326,21 +273,7 @@ def get_device_info(device_id):
             "device": safe_device
         })
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
 
-
-@app.route("/api/users/<device_id>", methods=["PUT"])
-def update_device_info(device_id):
-    """Update device information"""
-    try:
-        data = request.json
-        device = update_device(device_id, data)
-        
-        if not device:
-            return jsonify({
-                "success": False,
-                "error": "Device not found"
-            }), 404
         
         # Remove password from response
         safe_device = {k: v for k, v in device.items() if k != "password"}
@@ -408,31 +341,6 @@ def device_statistics():
 
 @app.route("/api/users/<device_id>/trigger-payload", methods=["POST"])
 def trigger_payload(device_id):
-    """
-    Trigger a test attack payload to a specific device/instance
-    
-    Request body:
-    {
-        "attack_type": "dos" | "exploit" | "reconnaissance" | "backdoor" | "normal"
-    }
-    
-    Returns:
-    {
-        "success": true,
-        "payload": {...},
-        "detection_result": {...},
-        "message": "..."
-    }
-    """
-    try:
-        # Verify device exists
-        device = get_device(device_id)
-        if not device:
-            return jsonify({
-                "success": False,
-                "error": "Device not found"
-            }), 404
-        
         data = request.json
         attack_type = data.get("attack_type", "dos").lower()
         
@@ -613,12 +521,6 @@ def get_device_threats(device_id):
         # Filter logs for this specific device IP
         device_ip = device["ip_address"]
         filtered_logs = [log for log in logs if device_ip in log]
-        
-        return jsonify({
-            "success": True,
-            "device_id": device_id,
-            "log_type": "threat",
-            "entries": [log.strip() for log in filtered_logs]
         })
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
@@ -733,21 +635,13 @@ def serve_static_files(filename):
     """Serve static CSS and JS files"""
     return send_from_directory("static", filename)
 
-@app.route("/<path:filename>")
-def serve_static(filename):
-    """Serve static files (js, css, html) from project root"""
-    # Only serve specific file types to avoid security issues
-    if filename.endswith(('.js', '.css', '.jpg', '.png', '.gif', '.ico', '.html')):
-        return send_from_directory(".", filename)
-    return "File not found", 404
-
 
 if __name__ == "__main__":
     print("\n" + "="*50)
     print("🚀 Cloud Threat Detection System")
     print("="*50)
     print(f"📡 Server starting on http://0.0.0.0:5000")
-    print(f"🌐 Access demo at http://localhost:5000")
+    print(f"🌐 Access demo at http://localhost:5000 by Sypanse X")
     print("="*50 + "\n")
     
     app.run(host="0.0.0.0", port=5000, debug=True)

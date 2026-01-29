@@ -1,4 +1,4 @@
-# Cloud Threat Detection System
+# AI Driven Cloud Security Threat Detection and Mitigation System - Synapse X
 
 > AI-Powered Real-Time Network Security Monitoring & Threat Mitigation
 
@@ -126,6 +126,7 @@ Navigate to `https://aicloud-vha2.onrender.com/` in your browser
 ---
 
 **Made with 💙 for Fortex36 by Team SynapseX**
+
 
 
 

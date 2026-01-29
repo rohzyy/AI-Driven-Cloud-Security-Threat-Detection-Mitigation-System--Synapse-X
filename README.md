@@ -2,6 +2,11 @@
 
 > AI-Powered Real-Time Network Security Monitoring & Threat Mitigation
 
+
+Video Tutorial:
+https://github.com/user-attachments/assets/c13f1b73-7c21-442d-bec1-811bc6184ea5
+
+
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.0-green.svg)](https://flask.palletsprojects.com/)
 [![ML Models](https://img.shields.io/badge/ML-Dual%20Model-orange.svg)](https://scikit-learn.org/)
@@ -126,6 +131,7 @@ Navigate to `https://aicloud-vha2.onrender.com/` in your browser
 ---
 
 **Made with 💙 for Fortex36 by Team SynapseX**
+
 
 
 

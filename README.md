@@ -12,10 +12,6 @@ https://github.com/user-attachments/assets/c13f1b73-7c21-442d-bec1-811bc6184ea5
 [![ML Models](https://img.shields.io/badge/ML-Dual%20Model-orange.svg)](https://scikit-learn.org/)
 [![Mobile](https://img.shields.io/badge/Deploy-Termux%20Ready-red.svg)](https://termux.com/)
 
-Project For Fortex36
-Team name - Synapse X
-Project - AI-Driven Cloud Security Threat Detection & Mitigation
-
 ### Key Features
 
 **Dual AI Model Architecture**
@@ -120,17 +116,11 @@ Navigate to `https://aicloud-vha2.onrender.com/` in your browser
 - View **system statistics** (requests, threats, blocks)
 - See **mitigation actions** triggered automatically
 
----
-
-## Team & Acknowledgments
-
-- Built for: Fortex 36
-- Team Lead: Rohan Malyadri  
-- Team: Kesava, Thanishker, Harinesh  
 
 ---
 
-**Made with 💙 for Fortex36 by Team SynapseX**
+**Made with 💙 - Team SynapseX**
+
 
 
 
